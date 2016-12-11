@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--
+	 Author: Mattthew Brauer, twitter @mattthew
+	 MIT license
+	-->
+	<title>Vibration Pattern Generator - Generate oscillating vibration patterns with Navigator.vibrate()</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sylvester/0.1.3/sylvester.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="assets/spline-editor.js"></script>
+	<script src="assets/vibration.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet" type="text/css">
+	<link href="assets/vibration.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div id="about">
+		<p>
+			<strong id="supported">
+				Warning:  This browser doesn't support navigator.vibrate()
+			</strong>
+		</p>
+		<p>
+			The browser cannot directly control the strength or frequncy of the device's vibration motor.  However, it can simulate this control by rapidly cycling the vibration motor ON and OFF and by changing the time-length of the ON and OFF phase of each cycle - like a Morse code.  This is accomplished with the Javascript function:  navigator.vibrate().  This generator creates these ON/OFF patterns, causes the device to vibrate (if supported by browser and device), and displays the Javascript code of the pattern.
+		</p>
+		<p>
+			The <strong>duration</strong> of the pattern is the sum (in milliseconds) of the time-length of each cycle, including each cycle's ON phase and OFF phase (i.e. pause).  If the intensity and roughness settings are high, thereby increasing the time-length of each cycle in the pattern, the duration setting is maintained by recuding the number of cycles.
+		</p>
+		<p>
+			The <strong>roughness</strong> setting effects the time-length of the ON phase of each cycle in the pattern.  The ON phase duration is constant throughout the pattern.  Because total duration is maintained, longer ON phases results in fewer cycles and a higher intensity, which results in a rough or lumpy texture.
+		</p>
+		<p>
+			The <strong>intensity</strong> curve effects the time-length of the OFF phase (i.e. pauses) in each cyle in the pattern.  The horizontal axis represents the duration of the pattern.  At the lowest point on the veritical axis, the pause is longest at 25 milliseconds.  At the highest point, the pause is 0.  A flat intensity curve along the top produces constant vibration.
+		</p>
+		<p>
+			The <strong>sputter</strong> settings adds randomness to the time-length of the ON phase.  At 0% sputter, the ON time-length is constant throughout the pattern and equal to the roughness setting.  At 100% sputter, the time-length of any one cycle may be as short as zero and as long as the entire duration of the pattern.  A little sputter goes a long way!
+		</p>
+		<p>
+			<strong>Tap pattern to copy to clipboard:</strong>
+		</p>
+		<p id="printout">
+			<span>
+				The pattern will be here after you press any "play >" button.
+			</span>
+		</p>
+	</div>
+	<div id="header">
+		<p>
+			Scroll up for the pattern printout and help.
+		</p>
+		<h1>
+			Haptic Vibration Pattern Generator
+		</h1>
+	</div>
+		<div id="test1">
+			<div>
+				<div id="visuals1" class="checkbox"><div></div></div>
+				<span id="visuals_label1" class="checkbox_label">Visuals: OFF</span>
+			</div>
+			<div>
+				<span class="label">Sputter %</span>
+				<span class="display" id="sputter_display1">0</span>
+				<div class="slider">
+					<div id="sputter_slide1"></div>
+				</div>
+			</div>
+			<div>
+				<span class="label">Roughness</span>
+				<span class="display" id="roughness_display1">0</span>
+				<div class="slider">
+					<div id="roughness_slide1"></div>
+				</div>
+			</div>
+			<div>
+				<span class="label">Duration</span>
+				<span class="display" id="duration_display1">0</span>
+				<div class="slider">
+					<div id="duration_slide1"></div>
+				</div>
+			</div>
+			<div>
+				<span class="label" id="intensity_label1">Intensity x Time</span>
+				<div id="spline1"></div>
+				<div id="spline_cover1"></div>
+			</div>
+			<div>
+				<button class="play" id="play1">
+					<span>play</span>
+					<div></div>
+				</button>
+			</div>
+	</div>
+		<div id="test2">
+			<div>
+				<div id="visuals2" class="checkbox"><div></div></div>
+				<span id="visuals_label2" class="checkbox_label">Visuals: OFF</span>
+			</div>
+			<div>
+				<span class="label">Sputter %</span>
+				<span class="display" id="sputter_display2">0</span>
+				<div class="slider">
+					<div id="sputter_slide2"></div>
+				</div>
+			</div>
+			<div>
+				<span class="label">Roughness</span>
+				<span class="display" id="roughness_display2">0</span>
+				<div class="slider">
+					<div id="roughness_slide2"></div>
+				</div>
+			</div>
+			<div>
+				<span class="label">Duration</span>
+				<span class="display" id="duration_display2">0</span>
+				<div class="slider">
+					<div id="duration_slide2"></div>
+				</div>
+			</div>
+			<div>
+				<span class="label" id="intensity_label2">Intensity x Time</span>
+				<div id="spline2"></div>
+				<div id="spline_cover2"></div>
+			</div>
+			<div>
+				<button class="play" id="play2">
+					<span>play</span>
+					<div></div>
+				</button>
+			</div>
+	</div>
+<body>
+</html>

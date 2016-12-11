@@ -1,0 +1,217 @@
+/*
+ Author: Mattthew Brauer, twitter @mattthew
+ MIT license
+*/
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	vertical-align: top;
+	font-feature-settings: 'lnum' 1;
+}
+
+body {
+	font-size: 0;
+	font-family: 'Raleway';
+	background-color: #333333;
+	color: #000;
+}
+
+#about p {
+	color: #d4d4d4;
+	text-align: left;
+	font-size: 3vw;
+	margin: 5vw;
+	line-height: 5vw;
+}
+
+#about p strong {
+	color: white;
+	font-weight: bold;
+}
+
+#printout {
+	margin-top: -3vw !important;
+	background-color: white;
+	border-radius: 0.8vw;
+}
+
+#printout span {
+	display: block;
+	padding: 2vw;
+	width: 90vw;
+	overflow: scroll;
+	color: black !important;
+	background-color: #e2f3ff;
+	border-radius: 0.8vw;
+	cursor: pointer;
+}
+
+#header {
+	color: white;
+	border-bottom: 1vw solid #a7a7a7;
+	padding: 4vw 0;
+}
+
+h1 {
+	margin: 0;
+	font-size:  5vw;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 4vw;
+}
+
+#header p {
+	margin: 0;
+	text-align: center;
+	font-size: 3vw;
+}
+
+#test1, #test2 {
+	width: 50vw;
+	display: inline-block;
+	border-bottom: 1vw solid #a7a7a7;
+}
+
+#test1 {
+	background-color: #ffffff;
+}
+
+#test2 {
+	background-color: #eaeaea;
+}
+
+#test1 > div, #test2 > div {
+	padding: 3vw 3vw 0 3vw;
+}
+
+.checkbox {
+	width: 12vw;
+	height: 12vw;
+	border-radius: 1.5vw;
+	background-color: #d0d0d0;
+	box-shadow: inset 0vw 0.5vw 1vw rgba(0,0,0,0.4);
+	padding: 1.5vw 0 0 1.5vw;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.checkbox div {
+	width: 9vw;
+	height: 9vw;
+	border-radius: 1vw;
+	background-color: #0099ff;
+	box-shadow: 0vw 0.4vw 1vw rgba(0,0,0,0.3);
+	display: none;
+}
+
+.checkbox_label {
+	height: 9vw;
+	font-size: 5vw;
+	display: inline-block;
+	padding: 3vw 0 0 3vw;
+	color: #5f5f5f;
+}
+
+.label {
+	width: 60%;
+	font-size: 5vw;
+	display: inline-block;
+	padding: 3vw 0 2vw 3vw;
+	text-align: left;
+	color: #5f5f5f;
+	white-space: nowrap;
+}
+
+.display {
+	width: 40%;
+	font-size: 5vw;
+	display: inline-block;
+	padding: 3vw 3vw 2vw 0;
+	text-align: right;
+	color: #5f5f5f;
+}
+
+.slider {
+	background-color: #d0d0d0;
+	height: 12vw;
+	border-radius: 6vw;
+}
+
+.slider > div {
+	width: 32vw;
+	border: 0 !important;
+}
+
+.slider span {
+	background-color: #0099ff !important;
+	width: 12vw !important;
+	height: 12vw !important;
+	border: 0 !important;
+	border-radius: 6vw;
+	box-shadow: 0vw 0.5vw 1vw rgba(0,0,0,0.4);
+	cursor: pointer !important;
+}
+
+#intensity_label2 {
+	text-align: right;
+	width: 95%;
+}
+
+#spline1, #spline2 {
+	width: 400px;
+	height: 200px;
+	margin-left: 1.7vw;
+	left: 0;
+	transform: scale(1);
+	transition: left 250ms, transform 250ms;
+}
+
+#spline_cover1, #spline_cover2 {
+	width: 400px;
+	height: 200px;
+	margin-left: 1.7vw;
+	margin-top: -200px;
+	border-radius: 1vw;
+	border: 1px solid rgb(70, 70, 70);
+}
+
+#spline1, #spline_cover1, #spline2, #spline_cover2 {
+	transform-origin: 0% 0%;
+	position: relative;
+}
+
+#spline1 canvas, #spline2 canvas {
+	border: 1px solid #464646;
+	border-radius: 1vw;
+}
+
+.play {
+	background-color: #ff0066;
+	display: block;
+	width: 100%;
+	height: 20vw;
+	border-radius: 2vw;
+	margin: 3vw 0vw;
+	padding-bottom: 1vw;
+	cursor: pointer;
+	border: 0;
+}
+
+.play span {
+	font-size: 7vw;
+	color: white;
+	font-weight: bold;
+}
+
+.play div {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-color: transparent transparent transparent #ffffff;
+	border-width: 3.5vw 0 3.5vw 7vw;
+	float: right;
+	margin-top: 1vw;
+	margin-right: 6vw;
+}
