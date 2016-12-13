@@ -11,6 +11,10 @@
 	font-feature-settings: 'lnum' 1;
 }
 
+@-ms-viewport{
+	width: device-width;
+}
+
 body {
 	font-size: 0;
 	font-family: 'Raleway';
@@ -21,7 +25,7 @@ body {
 #about p {
 	color: #d4d4d4;
 	text-align: left;
-	font-size: 3vw;
+	font-size: 3.5vw;
 	margin: 5vw;
 	line-height: 5vw;
 }
@@ -29,6 +33,10 @@ body {
 #about p strong {
 	color: white;
 	font-weight: bold;
+}
+
+#about a {
+	color: white;
 }
 
 #printout {
@@ -68,21 +76,24 @@ h1 {
 	font-size: 3vw;
 }
 
-#test1, #test2 {
-	width: 50vw;
+#tests {
+	background-color: white;
+	width: 100vw;
+	white-space: nowrap;
+	overflow: scroll;
+}
+
+.test_even, .test_odd {
+	width: 48.5vw;
 	display: inline-block;
 	border-bottom: 1vw solid #a7a7a7;
 }
 
-#test1 {
-	background-color: #ffffff;
-}
-
-#test2 {
+.test_odd {
 	background-color: #eaeaea;
 }
 
-#test1 > div, #test2 > div {
+.test_even > div, .test_odd > div {
 	padding: 3vw 3vw 0 3vw;
 }
 
@@ -154,12 +165,21 @@ h1 {
 	cursor: pointer !important;
 }
 
-#intensity_label2 {
-	text-align: right;
+.intensity_label {
 	width: 95%;
 }
 
-#spline1, #spline2 {
+.test_odd .intensity_label {
+	text-align: right;
+}
+
+.spline_holder {
+	width: 44vw;
+	height: 22vw;
+	overflow: hidden;
+}
+
+.spline {
 	width: 400px;
 	height: 200px;
 	margin-left: 1.7vw;
@@ -168,7 +188,7 @@ h1 {
 	transition: left 250ms, transform 250ms;
 }
 
-#spline_cover1, #spline_cover2 {
+.spline_cover {
 	width: 400px;
 	height: 200px;
 	margin-left: 1.7vw;
@@ -177,12 +197,12 @@ h1 {
 	border: 1px solid rgb(70, 70, 70);
 }
 
-#spline1, #spline_cover1, #spline2, #spline_cover2 {
+.spline, .spline_cover {
 	transform-origin: 0% 0%;
 	position: relative;
 }
 
-#spline1 canvas, #spline2 canvas {
+.spline canvas, .spline canvas {
 	border: 1px solid #464646;
 	border-radius: 1vw;
 }
