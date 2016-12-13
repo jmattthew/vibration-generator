@@ -6,15 +6,18 @@
 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
 var initialSplineScale = 1;
+var tests = 4;
 var splineWidth = 0;
 var splineHeight = 0;
 
 $(document).ready(function(){
 
-	$('body').scrollTop(5000);
-
+	$('html, body').scrollTop($(document).height());
+	$('.checkbox').data('visuals',false);
+	$('.play').data('enabled',true);
 	splineWidth = parseInt($('#spline1').css('width'));
 	splineHeight = parseInt($('#spline1').css('height'));
+	initSplineScale();
 
 	if(navigator.vibrate) {
 		$('#supported').eq(0).html('Groovy - This browser supports navigator.vibrate()');
@@ -51,10 +54,10 @@ $(document).ready(function(){
 		});
 	});
 
-	$('#visuals1, #visuals2').data('visuals',false);
-	$('#visuals1, #visuals_label1, #visuals2, #visuals_label2').click(function(){
-		var num = $(this).prop('id').indexOf('1');
-		num < 0 ? num = 2 : num = 1;
+	$('.checkbox, .checkbox_label').click(function(){
+		var num = $(this).prop('id');
+		num = parseInt(num.substr(num.length-1,num.length));
+		console.log(num);
 		if($('#visuals'+num).data('visuals')) {
 			$('#visuals'+num+' div').css('display','none');
 			$('#visuals'+num).data('visuals',false);
@@ -67,81 +70,54 @@ $(document).ready(function(){
 		document.getSelection().removeAllRanges();
 	});
 
-	$( '#sputter_slide1' ).slider({
+	$('.sputter_slide').slider({
 		value: 0,
 		min: 0,
-		max: 100,
+		max: 10,
 		step: 1,
 		create: function( event, ui ) {
-			$( '#sputter_display1' ).html( 0 );
+			var num = $(this).prop('id');
+			num = parseInt(num.substr(num.length-1,num.length));
+			$('#sputter_display'+num).html( 0 );
 		},
 		slide: function( event, ui ) {
-			$( '#sputter_display1' ).html( ui.value );
+			var num = $(this).prop('id');
+			num = parseInt(num.substr(num.length-1,num.length));
+			$('#sputter_display'+num).html( ui.value );
 		}
 	});
 
-	$( '#sputter_slide2' ).slider({
-		value: 0,
-		min: 0,
-		max: 100,
-		step: 1,
-		create: function( event, ui ) {
-			$( '#sputter_display2' ).html( 100 );
-		},
-		slide: function( event, ui ) {
-			$( '#sputter_display2' ).html( ui.value );
-		}
-	});
-
-	$( '#roughness_slide1' ).slider({
+	$('.roughness_slide').slider({
 		value: 5,
 		min: 5,
 		max: 20,
 		step: 5,
 		create: function( event, ui ) {
-			$( '#roughness_display1' ).html( 5 );
+			var num = $(this).prop('id');
+			num = parseInt(num.substr(num.length-1,num.length));
+			$('#roughness_display'+num).html( 5 );
 		},
 		slide: function( event, ui ) {
-			$( '#roughness_display1' ).html( ui.value );
+			var num = $(this).prop('id');
+			num = parseInt(num.substr(num.length-1,num.length));
+			$('#roughness_display'+num).html( ui.value );
 		}
 	});
 
-	$( '#roughness_slide2' ).slider({
-		value: 5,
-		min: 5,
-		max: 20,
-		step: 5,
-		create: function( event, ui ) {
-			$( '#roughness_display2' ).html( 20 );
-		},
-		slide: function( event, ui ) {
-			$( '#roughness_display2' ).html( ui.value );
-		}
-	});
-
-	$( '#duration_slide1' ).slider({
+	$('.duration_slide').slider({
 		value: 2000,
 		min: 250,
 		max: 2000,
 		step: 250,
 		create: function( event, ui ) {
-			$( '#duration_display1' ).html( '2,000' );
+			var num = $(this).prop('id');
+			num = parseInt(num.substr(num.length-1,num.length));
+			$('#duration_display'+num).html( '2,000' );
 		},
 		slide: function( event, ui ) {
-			$( '#duration_display1' ).html( numberWithCommas(ui.value) );
-		}
-	});
-
-	$( '#duration_slide2' ).slider({
-		value: 2000,
-		min: 250,
-		max: 2000,
-		step: 250,
-		create: function( event, ui ) {
-			$( '#duration_display2' ).html( '2,000');
-		},
-		slide: function( event, ui ) {
-			$( '#duration_display2' ).html( numberWithCommas(ui.value) );
+			var num = $(this).prop('id');
+			num = parseInt(num.substr(num.length-1,num.length));
+			$('#duration_display'+num).html( numberWithCommas(ui.value) );
 		}
 	});
 
@@ -149,8 +125,9 @@ $(document).ready(function(){
 		initialKnots: [
 			[30, 10],
 			[50, 10],
+			[120, 80],
 			[350, 190],
-			[370, 190]
+			[370, 180]
 		]
 	});
 
@@ -158,21 +135,52 @@ $(document).ready(function(){
 		initialKnots: [
 			[30, 190],
 			[50, 190],
+			[170, 110],
+			[190, 50],
 			[200, 10],
+			[210, 50],
+			[230, 110],
 			[350, 190],
 			[370, 190]
 		]
 	});
 
-	initSplineScale();
+	$('#spline3').splineEditor({
+		initialKnots: [
+			[30, 10],
+			[50, 10],
+			[82, 93],
+			[139, 39],
+			[179, 137],
+			[222, 91],
+			[264, 169],
+			[293, 138],
+			[350, 190]
+		]
+	});
 
-	$('#spline_cover1, #spline_cover2').click(function(){
-		var num = $(this).prop('id').indexOf('1');
-		num < 0 ? num = 2 : num = 1;
+	$('#spline4').splineEditor({
+		initialKnots: [
+			[29, 187],
+			[52, 189],
+			[91, 109],
+			[158, 173],
+			[236, 145],
+			[283, 44],
+			[345, 8],
+			[368, 18]
+ 		]
+	});
+
+	$('.spline_cover').click(function(){
+		$('.spline_holder').css('overflow','initial');
+		var num = $(this).prop('id');
+		num = parseInt(num.substr(num.length-1,num.length));
 		$('#spline'+num).css('transform','scale('+(initialSplineScale*2.2)+')');
 		$('#spline'+num).css('z-index','1');
-		if(num==2) {
-			$('#spline2, #spline_cover2').css('left','-192px');
+		if(num%2 == 0) {
+			$('#spline'+num).css('left','-157px');
+			$('#spline_cover'+num).css('left','-157px');
 		}
 		$('#intensity_label'+num).html('Collapse');
 		$('#intensity_label'+num).css({
@@ -181,21 +189,27 @@ $(document).ready(function(){
 		});
 	});
 
-	$('#intensity_label1, #intensity_label2').click(function(){
+	window.addEventListener('orientationchange', function() {
 		initSplineScale();
-		$('#spline1, #spline2').css('z-index','');
-		$('#spline2, #spline_cover2').css('left','');
-		$('#intensity_label1, intensity_label2').html('Intensity x Time');
-		$('#intensity_label1, #intensity_label2').css({
+	}, false);
+
+
+	$('.intensity_label').click(function(){
+		$('.spline_holder').css('overflow','hidden');
+		initSplineScale();
+		$('.spline').css('z-index','');
+		$('.spline').css('left','');
+		$('.spline_cover').css('left','');
+		$('.intensity_label').html('Intensity x Time');
+		$('.intensity_label').css({
 			'font-weight' : '',
 			'color' : ''
 		});
 	});
 
-	$('#play1, #play2').data('enabled',true);
-	$('#play1, #play2').mousedown(function(){
-		var num = $(this).prop('id').indexOf('1');
-		num < 0 ? num = 2 : num = 1;
+	$('.play').mousedown(function(){
+		var num = $(this).prop('id');
+		num = parseInt(num.substr(num.length-1,num.length));
 		$(this).blur();
 		if($(this).data('enabled')) {
 			doDisable(num);
@@ -220,18 +234,22 @@ function numberWithCommas(x) {
 
 function initSplineScale() {
 	initialSplineScale = ($('#play1').width()/splineWidth)*.95;
-	$('#spline1, #spline2, #spline_cover1, #spline_cover2').css('transform','scale('+initialSplineScale+')');
-	$('#spline_cover1, #spline_cover2').css('margin-bottom','-'+(200-(200*initialSplineScale))+'px');
+	$('.spline, .spline_cover').css({
+		'transform' : 'scale('+initialSplineScale+')'
+	});
+	$('.spline_cover').css({
+		'margin-bottom' : '-'+(200-(200*initialSplineScale))+'px'
+	});
 }
 
 function doDisable(num) {
-	$('#play1, #play2').data('enabled',false);
-	$('#play1, #play2').css({
+	$('.play').data('enabled',false);
+	$('.play').css({
 		'background-color':'#d0d0d0',
 		'cursor':'default'
 	});
-	$('#play1 span, #play2 span').css('color','#9c9c9c');
-	$('#play1 div, #play2 div').css('border-color','transparent transparent transparent #9c9c9c');
+	$('.play span').css('color','#9c9c9c');
+	$('.play div').css('border-color','transparent transparent transparent #9c9c9c');
 }
 
 function doEnable(num) {
@@ -240,14 +258,14 @@ function doEnable(num) {
 		return a + b;
 	}, 0);
 	setTimeout(function(){
-		$('#play1, #play2').data('enabled',true);
-		$('#play1, #play2').css({
+		$('.play').data('enabled',true);
+		$('.play').css({
 			'background-color':'',
 			'cursor':''
 		});
-		$('#play1 span, #play2 span').css('color','');
-		$('#play1 div, #play2 div').css('border-color','');
-		$('#spline_cover'+num).css('background-color','');
+		$('.play span').css('color','');
+		$('.play div').css('border-color','');
+		$('.spline_cover').css('background-color','');
 	},sumD);
 }
 

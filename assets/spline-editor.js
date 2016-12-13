@@ -134,7 +134,7 @@
 		canvas.bind('mouseup', function (evt) {
 			if (that.knotBeingDragged) {
 				if (!that.knotBeingDragged.wasMoved) {
-					// Clicked witho`ut moving means delete the knot
+					// Clicked without moving means delete the knot
 					that.knots = _.without(that.knots, that.knotBeingDragged);
 				} else {
 					that.knotBeingHovered = that.knotMouseEventRefersTo(evt);
@@ -301,6 +301,7 @@
 			x: pos[0],
 			y: pos[1]
 		});
+//		console.log('[' + pos[0] + ', ' + pos[1] + ']');
 		this.refresh();
 	}
 
