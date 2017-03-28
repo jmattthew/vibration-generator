@@ -357,6 +357,7 @@ function doVibrate(num) {
 	if(navigator.vibrate) {
 		var pattern = $('#play'+num).data('pattern');
 		navigator.vibrate(pattern);
+		console.log(pattern);
 	}
 }
 
